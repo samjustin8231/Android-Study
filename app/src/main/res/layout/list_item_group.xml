@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
     android:layout_height="match_parent">
     <com.mcxtzhang.swipemenulib.SwipeMenuLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
         android:clickable="true"
         android:paddingBottom="1dp">
 
@@ -23,6 +25,7 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="#d9dee4"
+            android:focusable="false"
             android:text="置顶"
             android:textColor="@android:color/white"/>
 
@@ -31,6 +34,7 @@
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:background="#ecd50a"
+            android:focusable="false"
             android:clickable="true"
             android:text="标记未读"
             android:textColor="@android:color/white"/>
@@ -39,6 +43,7 @@
             android:id="@+id/btnDelete"
             android:layout_width="60dp"
             android:layout_height="match_parent"
+            android:focusable="false"
             android:background="#FF4500"
             android:text="删除"
             android:textColor="@android:color/white"/>

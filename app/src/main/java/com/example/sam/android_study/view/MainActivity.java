@@ -88,14 +88,15 @@ public class MainActivity extends Activity implements OnClickListener {
 				new GetDataTask().execute();
 			}
 		});
-		mPullToRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				ChatActivity.title = mListItems.get(i);
-				Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-				startActivity(intent);
-			}
-		});
+//		mPullToRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//				System.out.println("group item click.");
+//				ChatActivity.title = mListItems.get(i);
+//				Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+//				startActivity(intent);
+//			}
+//		});
 
 		ListView actualListView = mPullToRefreshListView.getRefreshableView();
 
