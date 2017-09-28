@@ -54,7 +54,7 @@
                 android:id="@+id/tvChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="微信"
+                android:text="电话"
                 android:textColor="@drawable/tab_textview" />
         </LinearLayout>
 
@@ -77,7 +77,7 @@
                 android:id="@+id/tvFriends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="朋友"
+                android:text="通话记录"
                 android:textColor="@drawable/tab_textview" />
         </LinearLayout>
 
@@ -94,13 +94,13 @@
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:background="#00000000"
-                android:src="@drawable/tab_contacts" />
+                android:src="@drawable/tab_chat" />
 
             <TextView
                 android:id="@+id/tvContacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="通讯录"
+                android:text="聊天"
                 android:textColor="@drawable/tab_textview" />
         </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:id="@+id/tvSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="设置"
+                android:text="我"
                 android:textColor="@drawable/tab_textview" />
         </LinearLayout>
     </LinearLayout>

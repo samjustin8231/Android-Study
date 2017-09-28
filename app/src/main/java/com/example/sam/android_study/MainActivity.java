@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sam.android_study.adapter.GroupAdapter;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -40,7 +41,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	//page3 UI controls
 	private PullToRefreshListView mPullToRefreshListView;
 	private LinkedList<String> mListItems;
-	private ArrayAdapter<String> mAdapter;
+	private GroupAdapter mAdapter;
 	private String[] mStrings = { "John", "Michelle", "Amy", "Kim", "Mary",
 			"David", "Sunny", "James", "Maria", "Michael", "Sarah", "Robert",
 			"Lily", "William", "Jessica", "Paul", "Crystal", "Peter",
@@ -90,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		mListItems = new LinkedList<String>();
 		mListItems.addAll(Arrays.asList(mStrings));
 
-		mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mListItems);
+		mAdapter = new GroupAdapter(this,mListItems);
 		actualListView.setAdapter(mAdapter);
 	}
 
