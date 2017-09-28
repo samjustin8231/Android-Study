@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -151,7 +153,24 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public void logoutAction(View view) {
-		number = "";
-		finish();
+		AlertDialog dialog = new AlertDialog.Builder(this)
+				.setTitle("注销")
+				.setMessage("确定注销吗？")
+				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				})
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						number = "";
+						finish();
+					}
+				})
+				.create();
+		dialog.show();
+
 	}
 }
