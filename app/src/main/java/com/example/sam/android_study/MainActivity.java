@@ -1,21 +1,30 @@
 package com.example.sam.android_study;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -27,6 +36,16 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView tvTitle;
 
 	public static String number;//phone number
+
+	//page3
+	private PullToRefreshListView mPullToRefreshListView;
+	private LinkedList<String> mListItems;
+	private ArrayAdapter<String> mAdapter;
+	private String[] mStrings = { "John", "Michelle", "Amy", "Kim", "Mary",
+			"David", "Sunny", "James", "Maria", "Michael", "Sarah", "Robert",
+			"Lily", "William", "Jessica", "Paul", "Crystal", "Peter",
+			"Jennifer", "George", "Rachel", "Thomas", "Lisa", "Daniel", "Elizabeth",
+			"Kevin" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +59,38 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private void initView() {
+		initViewFrame();
+
+
+	}
+
+	private void initViewPage3() {
+		// Set a listener to be invoked when the list should be refreshed.
+		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_to_refresh_listview);
+		mPullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+				// Update the LastUpdatedLabel
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+				// Do work to refresh the list here.
+				new GetDataTask().execute();
+			}
+		});
+
+		ListView actualListView = mPullToRefreshListView.getRefreshableView();
+
+		mListItems = new LinkedList<String>();
+		mListItems.addAll(Arrays.asList(mStrings));
+
+		mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mListItems);
+		actualListView.setAdapter(mAdapter);
+	}
+
+	private void initViewFrame() {
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 
 		llChat = (LinearLayout) findViewById(R.id.llChat);
@@ -138,6 +189,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			ivCurrent = ivContacts;
 			tvContacts.setSelected(true);
 			tvCurrent = tvContacts;
+
+			initViewPage3();
+
 			break;
 		case R.id.llSettings:
 			viewPager.setCurrentItem(3);
@@ -172,5 +226,27 @@ public class MainActivity extends Activity implements OnClickListener {
 				.create();
 		dialog.show();
 
+	}
+
+	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			// Simulates a background job.
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+			}
+			return mStrings;
+		}
+		@Override
+		protected void onPostExecute(String[] result) {
+			mListItems.addFirst("Added after refresh...");
+			mAdapter.notifyDataSetChanged();
+
+			// Call onRefreshComplete when the list has been refreshed.
+			mPullToRefreshListView.onRefreshComplete();
+			super.onPostExecute(result);
+		}
 	}
 }
