@@ -1,4 +1,4 @@
-package com.example.sam.android_study;
+package com.example.sam.android_study.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.sam.android_study.R;
 
 public class LoginActivity extends Activity {
     private EditText etNumber;

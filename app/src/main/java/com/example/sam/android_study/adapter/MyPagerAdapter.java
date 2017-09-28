@@ -2,7 +2,7 @@
  * FileName:MyPagerAdapter.java
  * Copyright(C) 2016 zteict
  */
-package com.example.sam.android_study;
+package com.example.sam.android_study.adapter;
 
 import java.util.ArrayList;
 import java.util.List;

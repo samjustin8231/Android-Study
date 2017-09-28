@@ -1,4 +1,4 @@
-package com.example.sam.android_study;
+package com.example.sam.android_study.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -17,13 +18,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sam.android_study.R;
 import com.example.sam.android_study.adapter.GroupAdapter;
+import com.example.sam.android_study.adapter.MyPagerAdapter;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -83,6 +86,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
 				// Do work to refresh the list here.
 				new GetDataTask().execute();
+			}
+		});
+		mPullToRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				ChatActivity.title = mListItems.get(i);
+				Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+				startActivity(intent);
 			}
 		});
 
@@ -149,10 +160,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private void initData() {
 		LayoutInflater mInflater = LayoutInflater.from(this);
-		View tab01 = mInflater.inflate(R.layout.tab01, null);
-		View tab02 = mInflater.inflate(R.layout.tab02, null);
-		View tab03 = mInflater.inflate(R.layout.tab03, null);
-		View tab04 = mInflater.inflate(R.layout.tab04, null);
+		View tab01 = mInflater.inflate(R.layout.tab_call, null);
+		View tab02 = mInflater.inflate(R.layout.tab_call_history, null);
+		View tab03 = mInflater.inflate(R.layout.tab_chat, null);
+		View tab04 = mInflater.inflate(R.layout.tab_me, null);
 		views.add(tab01);
 		views.add(tab02);
 		views.add(tab03);
