@@ -27,7 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class MainActivity extends Activity implements OnClickListener {
-
+	//UI controls about view pager and bottom buttons
 	private List<View> views = new ArrayList<View>();
 	private ViewPager viewPager;
 	private LinearLayout llChat, llFriends, llContacts, llSettings;
@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public static String number;//phone number
 
-	//page3
+	//page3 UI controls
 	private PullToRefreshListView mPullToRefreshListView;
 	private LinkedList<String> mListItems;
 	private ArrayAdapter<String> mAdapter;
@@ -59,11 +59,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private void initView() {
+		//init view about viewpager and bottom buttons;
 		initViewFrame();
 
 
 	}
 
+	/**
+	 * init UI controls(pull to refresh list view) in page3
+	 */
 	private void initViewPage3() {
 		// Set a listener to be invoked when the list should be refreshed.
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_to_refresh_listview);
@@ -90,6 +94,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		actualListView.setAdapter(mAdapter);
 	}
 
+	/**
+	 * init view about viewpager and bottom buttons;
+	 */
 	private void initViewFrame() {
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -157,11 +164,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		tvTitle.setText(number);
 	}
 
+	/**
+	 * click bottom button
+	 * @param v
+	 */
 	@Override
 	public void onClick(View v) {
 		changeTab(v.getId());
 	}
 
+	/**
+	 * switch tab
+	 * @param id
+	 */
 	private void changeTab(int id) {
 		ivCurrent.setSelected(false);
 		tvCurrent.setSelected(false);
@@ -190,6 +205,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			tvContacts.setSelected(true);
 			tvCurrent = tvContacts;
 
+			//init UI controls in this page
 			initViewPage3();
 
 			break;
