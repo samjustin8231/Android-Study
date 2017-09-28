@@ -12,6 +12,7 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -44,8 +45,8 @@
 
             <ImageView
                 android:id="@+id/ivChat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:background="#00000000"
                 android:src="@drawable/tab_chat" />
 
@@ -67,8 +68,8 @@
 
             <ImageView
                 android:id="@+id/ivFriends"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:background="#00000000"
                 android:src="@drawable/tab_friends" />
 
@@ -90,8 +91,8 @@
 
             <ImageView
                 android:id="@+id/ivContacts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:background="#00000000"
                 android:src="@drawable/tab_contacts" />
 
@@ -113,8 +114,8 @@
 
             <ImageView
                 android:id="@+id/ivSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:background="#00000000"
                 android:src="@drawable/tab_setting" />
 

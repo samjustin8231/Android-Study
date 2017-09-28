@@ -22,6 +22,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private LinearLayout llChat, llFriends, llContacts, llSettings;
 	private ImageView ivChat, ivFriends, ivContacts, ivSettings, ivCurrent;
 	private TextView tvChat, tvFriends, tvContacts, tvSettings, tvCurrent;
+	private TextView tvTitle;
+
+	public static String number;//phone number
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		tvFriends = (TextView) findViewById(R.id.tvFriends);
 		tvContacts = (TextView) findViewById(R.id.tvContacts);
 		tvSettings = (TextView) findViewById(R.id.tvSettings);
+
+		tvTitle = (TextView) findViewById(R.id.tvTitle);
 
 		ivChat.setSelected(true);
 		tvChat.setSelected(true);
@@ -94,6 +99,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		MyPagerAdapter adapter = new MyPagerAdapter(views);
 		viewPager.setAdapter(adapter);
+
+		//number
+		tvTitle.setText(number);
 	}
 
 	@Override
@@ -142,4 +150,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	public void logoutAction(View view) {
+		number = "";
+		finish();
+	}
 }
