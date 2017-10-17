@@ -5,10 +5,13 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/tv_chat_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="Chat Tab"
+        android:clickable="true"
+        android:onClick="clickTV"
         android:textSize="30sp" />
 
 </LinearLayout>

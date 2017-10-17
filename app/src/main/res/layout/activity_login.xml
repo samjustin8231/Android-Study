@@ -21,6 +21,7 @@
 
         <EditText
             android:id="@+id/etNumber"
+            android:text="17717372410"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -40,6 +41,7 @@
             android:id="@+id/etCode"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:text="2410"
             android:layout_height="wrap_content" />
 
         <Button

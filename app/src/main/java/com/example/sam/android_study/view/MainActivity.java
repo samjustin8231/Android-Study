@@ -7,10 +7,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.format.DateUtils;
@@ -22,7 +25,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sam.android_study.R;
 import com.example.sam.android_study.adapter.GroupAdapter;
@@ -38,8 +43,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	private ImageView ivChat, ivFriends, ivContacts, ivSettings, ivCurrent;
 	private TextView tvChat, tvFriends, tvContacts, tvSettings, tvCurrent;
 	private TextView tvTitle;
+	private ProgressDialog progressDialog;
 
 	public static String number;//phone number
+
+	//page1
+	private TextView tv_chat_content;
 
 	//page3 UI controls
 	private PullToRefreshListView mPullToRefreshListView;
@@ -60,6 +69,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		initView();
 
 		initData();
+
+
+
 	}
 
 	private void initView() {
@@ -175,6 +187,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		//number
 		tvTitle.setText(number);
+
+		//
+		tv_chat_content = (TextView) tab01.findViewById(R.id.tv_chat_content);
+		tv_chat_content.setText("改变了！");
 	}
 
 	/**
@@ -191,6 +207,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * @param id
 	 */
 	private void changeTab(int id) {
+		System.out.println("changeTab:"+id);
+
 		ivCurrent.setSelected(false);
 		tvCurrent.setSelected(false);
 		switch (id) {
@@ -236,6 +254,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public void logoutAction(View view) {
+
 		AlertDialog dialog = new AlertDialog.Builder(this)
 				.setTitle("注销")
 				.setMessage("确定注销吗？")
@@ -248,13 +267,34 @@ public class MainActivity extends Activity implements OnClickListener {
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						number = "";
-						finish();
+						//显示ProgressDialog
+						progressDialog = ProgressDialog.show(MainActivity.this, "Loading...", "Please wait...", true, false);
+
+						//新建线程
+						new Thread(){
+
+							@Override
+							public void run() {
+								try {
+									Thread.sleep(2000);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+
+								//向handler发消息
+								handler.sendEmptyMessage(0);
+							}}.start();
+
+
 					}
 				})
 				.create();
 		dialog.show();
 
+	}
+
+	public void clickTV(View view) {
+		Toast.makeText(this,"哈哈",Toast.LENGTH_LONG).show();
 	}
 
 	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
@@ -278,4 +318,19 @@ public class MainActivity extends Activity implements OnClickListener {
 			super.onPostExecute(result);
 		}
 	}
+
+	/**
+	 * 用Handler来更新UI
+	 */
+	private Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+
+			//关闭ProgressDialog
+			progressDialog.dismiss();
+
+			number = "";
+			finish();
+		}};
 }
